@@ -1,0 +1,5 @@
+server:
+    port: 7081
+spring:
+  application:
+    name: doctor-portal
