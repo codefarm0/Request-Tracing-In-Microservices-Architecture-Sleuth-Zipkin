@@ -3,3 +3,9 @@ server:
 spring:
   application:
     name: doctor-portal
+  sleuth:
+    sampler:
+      rate: 100
+  zipkin:
+    base-url: http://localhost:9411
+

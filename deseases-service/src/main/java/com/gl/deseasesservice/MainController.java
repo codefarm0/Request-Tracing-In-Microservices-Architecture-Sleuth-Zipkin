@@ -1,7 +1,12 @@
 package com.gl.deseasesservice;
 
+import com.gl.deseasesservice.api.DiseaseServiceApi;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -11,18 +16,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class MainController {
 
-    @Value("${spring.application.name:no name}")
-    private String appName;
+    private static Logger logger = LoggerFactory.getLogger(MainController.class);
 
-    @Value("${server.port:no port}")
-    private String port;
-    @GetMapping("/diseases")
-    public String desease(){
-        return "List of diseases";
-    }
-
-    @GetMapping("/location")
-    public String getDeseaseServiceLocation(){
-        return appName + " : " + port;
+    @Autowired
+    private DiseaseServiceApi doctorsServiceApi;
+    @GetMapping("/allDiseases/{germs}")
+    public String diseases(@PathVariable String germs){
+        logger.info("got hit on /allDiseases/"+germs);
+        return doctorsServiceApi.getDiseases(germs);
     }
 }

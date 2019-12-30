@@ -1,7 +1,11 @@
 package com.gl.patientsservice;
 
-import org.springframework.beans.factory.annotation.Value;
+import com.gl.patientsservice.api.PatientServiceApi;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -11,18 +15,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class MainController {
 
-    @Value("${spring.application.name:no name}")
-    private String appName;
+    private static Logger logger = LoggerFactory.getLogger(MainController.class);
 
-    @Value("${server.port:no port}")
-    private String port;
-    @GetMapping("/patients")
-    public String patients(){
-        return "List of diseases";
-    }
-
-    @GetMapping("/location")
-    public String getDeseaseServiceLocation(){
-        return appName + " : " + port;
+    @Autowired
+    private PatientServiceApi doctorsServiceApi;
+    @GetMapping("/allPatients/{city}")
+    public String patients(@PathVariable String city){
+        logger.info("got hit on /allPatients/"+city);
+        return doctorsServiceApi.getPatients(city);
     }
 }

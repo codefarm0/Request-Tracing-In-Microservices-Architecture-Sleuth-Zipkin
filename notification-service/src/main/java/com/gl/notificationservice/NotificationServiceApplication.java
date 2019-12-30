@@ -1,13 +1,13 @@
-package com.gl.deseasesservice;
+package com.gl.notificationservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class DeseasesServiceApplication {
+public class NotificationServiceApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(DeseasesServiceApplication.class, args);
+        SpringApplication.run(NotificationServiceApplication.class, args);
     }
 
 }
